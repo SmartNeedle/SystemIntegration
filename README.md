@@ -87,7 +87,7 @@ Trajectory control:
 - *sim_level_trajcontrol:=1* : for system integration demo
 - *sim_level_trajcontrol:=2* : for real nodes
 
-To run real sensors ROS node: (more detail on what needs to be install under [Arduino Material](https://github.com/SmartNeedle/ros2_needle_guide_robot/tree/main/Arduino%20material) for the detail.)
+To run real sensors ROS node: (more detail on what needs to be install under [Arduino Material](https://github.com/SmartNeedle/ros2_needle_guide_robot/tree/main/Arduino%20material))
 ```bash
 source /opt/ros/noetic/setup.bash
 rosrun rosserial_python serial_node.py /dev/ttyACM0
