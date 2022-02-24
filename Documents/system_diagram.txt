@@ -29,14 +29,14 @@ rectangle "End Effector Hardware" {
   usecase "Needle Driver" as EndHW_NeedleDriver
 }
 
-rectangle "X-Y Stage Controller" {
+rectangle "ROS2 Needle Guide Robot" {
   usecase "Stage state builder node" as XY_Builder
   usecase "Needle Pose Sensor Node" as XY_Sensor
   usecase "Stage Control Node" as XY_Controller
 }
 
-rectangle "X-Y Stage Hardware" {
-  usecase "Arduino software + Putty logger" as XYHW_ArduinoPutty
+rectangle "Needle Guide Hardware" {
+  usecase "Arduino software" as XYHW_Arduino
   usecase "Needle Pose Sensors" as XYHW_Sensors
   usecase "Stage Controller Newmark systems" as XYHW_Controller
   usecase "XY Stage" as XYHW_Stage
@@ -74,8 +74,8 @@ XY_Builder --> UI_IGTLIN : /stage/state/needle_pose \n geometry_msgs/msg/PoseSta
 XY_Sensor --> XY_Builder : /needle/state/pose \n geometry_msgs/msg/PoseStamped
 XY_Controller --> XY_Builder : /stage/state/pose \n geometry_msgs/msg/PoseStamped
 
-XY_Sensor <--- XYHW_ArduinoPutty
-XYHW_ArduinoPutty <-- XYHW_Sensors
+XY_Sensor <--- XYHW_Arduino
+XYHW_Arduino <-- XYHW_Sensors
 XY_Controller <--> XYHW_Controller
 XYHW_Controller <--> XYHW_Stage
 
