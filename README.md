@@ -66,7 +66,7 @@ Usage <a name="usage"></a>
 
 To run simulation:(Put every simulation level to 1)
 ```bash
-ros2 launch system_bringup system.launch.py sim_level:=1 sim_level_needle_sensing:=1 sim_level_trajcontrol:=1 ip:=<demo IP address of the interrogator> numCHs:=<number of FBG channels> numAAs:=<number of FBG active areas per channel> needleParamFile:=<sensorized needle parameter JSON file path>
+ros2 launch system_bringup system.launch.py sim_level:=1 sim_level_needle_sensing:=1 sim_level_trajcontrol:=1 ip:=<demo IP address of the interrogator> needleParamFile:=<sensorized needle parameter JSON file path>
 ```
 To run with real hardware: (Put every simulation level to 2)
 ```bash
@@ -76,8 +76,8 @@ ros2 launch system_bringup system.launch.py sim_level:=2 sim_level_needle_sensin
 Needle Guide:
 - *sim_level:=0* : Emulated (dummy nodes) stage and sensors only
 - *sim_level:=1* : Virtual stage and sensors, simulated in Gazebo (Not yet fully implemented)
-- *sim_level:=2* : Physical stage and sensors (Depth and rotation sensors currently only emulated)
-- *sim_level:=3* : Both virtual and physical sensors
+- *sim_level:=2* : Physical stage and sensors
+- *sim_level:=3* : Both virtual and physical stages and physical sensors
 
 Shape-Sensing Needle Node:
 - *sim_level_needle_sensing:=1* : Launches the demo node: hyperion_demo.launch.py
@@ -87,6 +87,11 @@ Trajectory control:
 - *sim_level_trajcontrol:=1* : for system integration demo
 - *sim_level_trajcontrol:=2* : for real nodes
 
+To run real sensors ROS node: (more detail on what needs to be install under [Arduino Material](SmartNeedle/ros2_needle_guide_robot/ArduinoMaterial/) for the detail.)
+```bash
+source /opt/ros/noetic/setup.bash
+rosrun rosserial_python serial_node.py /dev/ttyACM0
+```
 ### Launching Shape-Sensing Needle Node
 First, you need to download the python requirements in the `ros2_needle_shape_publisher` repo by running the command in the `ros2_needle_shape_publisher` cloned repo directory
 ```
