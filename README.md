@@ -94,9 +94,19 @@ rosrun rosserial_python serial_node.py /dev/ttyACM0
 ```
 ### Launching Shape-Sensing Needle Node
 First, you need to download the python requirements in the `ros2_needle_shape_publisher` repo by running the command in the `ros2_needle_shape_publisher` cloned repo directory
-```
+```bash
 pip install -r ./requirements.txt
 ```
+
+For general launching of the entire system (interrogator + needle node) use:
+
+```bash
+ros2 launch system_bringup needle.launch.py \ 
+    needleParamFile:=path/to/needle_params.json \
+    interrogatorIP:=<IP address of the interrogator> \
+    sim_level_needle_sensing:=<1,2>
+```
+Afterwards, require FBG calibration by going to step 3 below.
 
 1. Launch the FBG interrogator node to gather the sensor readings:
 
@@ -107,7 +117,7 @@ ros2 launch hyperion_interrogator hyperion_demo.launch.py ip:=<demo IP address o
 For the actual hardware interface node
     
 ```bash
-ros2 launch hyperion_interrogator hyperion_streamer.launch.py ip:=<demo IP address of the interrogator> 
+ros2 launch hyperion_interrogator hyperion_streamer.launch.py ip:=<actual IP address of the interrogator> 
 ```
 2. (If connected to hardware) Ensure that the sensorized needle is straight to prepare for sensor calibration
 3. Perform sensor calibration by launching the `calibrate_sensors` node
