@@ -15,6 +15,7 @@ pkg_needle_path_control = get_package_share_directory('needle_path_control')
 pkg_trajcontrol = get_package_share_directory('trajcontrol')
 pkg_hyperion_interrogator = get_package_share_directory('hyperion_interrogator')
 pkg_needle_shape_publisher = get_package_share_directory('needle_shape_publisher')
+pkg_system_bringup = get_package_share_directory('system_bringup')
 
 def generate_launch_description():
     print(os.getcwd())
@@ -41,6 +42,7 @@ def generate_launch_description():
         ),
         DeclareLaunchArgument( 'needleParamFile',
                                              description="The shape-sensing needle parameter json file." ),
+        DeclareLaunchArgument('interrogatorIP', description="Hyperion Interrogator IP address.", default_value='10.0.0.55'),
 
         actions.LogInfo(msg=["Launching with sim level: ", LaunchConfiguration('sim_level')]),
         IncludeLaunchDescription(
@@ -53,25 +55,34 @@ def generate_launch_description():
                 os.path.join(pkg_needle_pose_sensors, 'launch', 'needle_pose_sensors_launch.py')
                 )
             ),
-     	IncludeLaunchDescription(
+       IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
-                os.path.join(pkg_trajcontrol, 'launch', 'virtual_nodes.launch.py')
+                os.path.join(pkg_needle_path_control, 'launch', 'needle_position_launch.py')
                 ),
-                condition=conditions.IfCondition(
-               PythonExpression([LaunchConfiguration('sim_level_trajcontrol'), " == 2"]))
-            ),
+            condition=conditions.IfCondition(
+               PythonExpression([LaunchConfiguration('sim_level'), " == 1 or ", 
+               LaunchConfiguration('sim_level'), " == 3"]))
+            ),     
+     	#IncludeLaunchDescription(
+         #   PythonLaunchDescriptionSource(
+          #      os.path.join(pkg_trajcontrol, 'launch', 'virtual_nodes.launch.py')
+           #     ),
+            #    condition=conditions.IfCondition(
+            #   PythonExpression([LaunchConfiguration('sim_level_trajcontrol'), " == 2"]))
+            #),
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
-                os.path.join(pkg_trajcontrol, 'launch', 'demo.launch.py')
+                os.path.join(pkg_trajcontrol, 'launch', 'real_test.launch.py')
                 ),
                 condition=conditions.IfCondition(
                PythonExpression([LaunchConfiguration('sim_level_trajcontrol'), " == 1"]))
             ),
          IncludeLaunchDescription(
              PythonLaunchDescriptionSource(
-                 "needle.launch.py"
+                 os.path.join(pkg_system_bringup, 'launch', "needle.launch.py")
                 ),
-                 launch_arguments={'sim_level_needle_sensing': LaunchConfiguration('sim_level_needle_sensing'), 'needleParamFile': LaunchConfiguration('needleParamFile')}.items()
+                 launch_arguments={'sim_level_needle_sensing': LaunchConfiguration('sim_level_needle_sensing'), 'needleParamFile': LaunchConfiguration('needleParamFile'),
+                 		    'interrogatorIP': LaunchConfiguration('interrogatorIP')}.items()
             ),
 #        IncludeLaunchDescription(
 #            PythonLaunchDescriptionSource(
@@ -93,14 +104,7 @@ def generate_launch_description():
 #               ),
 #                launch_arguments = {'needleParamFile': LaunchConfiguration( 'needleParamFile')}.items()
 #           ),
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(
-                os.path.join(pkg_needle_path_control, 'launch', 'needle_position_launch.py')
-                ),
-            condition=conditions.IfCondition(
-               PythonExpression([LaunchConfiguration('sim_level'), " == 1 or ", 
-               LaunchConfiguration('sim_level'), " == 3"]))
-            ),
+        
         Node(
             package="adaptive_guide",
             executable="stage_state_builder",

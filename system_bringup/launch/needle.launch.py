@@ -47,11 +47,15 @@ def generate_launch_description():
 
     arg_params = DeclareLaunchArgument( 'needleParamFile',
                                              description="The shape-sensing needle parameter json file." )
+                                             
+    arg_interrIP = DeclareLaunchArgument('interrogatorIP', default_value='10.0.0.55')
 
     # other launch files
     ld_needlepub = IncludeLaunchDescription( # needle shape publisher
              PythonLaunchDescriptionSource(
                 os.path.join(pkg_needle_shape_publisher, 'sensorized_shapesensing_needle_decomposed.launch.py')),
+                condition=conditions.IfCondition(
+               PythonExpression([LaunchConfiguration('sim_level_needle_sensing'), " == 2"])),
                 launch_arguments = {'needleParamFile': LaunchConfiguration( 'needleParamFile')}.items()
             )
 
@@ -63,17 +67,27 @@ def generate_launch_description():
                PythonExpression([LaunchConfiguration('sim_level_needle_sensing'), " == 1"])),
                launch_arguments = {'numCH': TextSubstitution(text=str(numCHs)), 'numAA': TextSubstitution(text=str(numAAs))}.items()
             )
+    ld_shapedemo = IncludeLaunchDescription( # shape demo
+            PythonLaunchDescriptionSource(
+                os.path.join(pkg_needle_shape_publisher, 'shapesensing_needle_demo.launch.py')
+                ),
+                condition=conditions.IfCondition(
+               PythonExpression([LaunchConfiguration('sim_level_needle_sensing'), " == 1"])),
+               launch_arguments = {'numCH': TextSubstitution(text=str(numCHs)), 'numAA': TextSubstitution(text=str(numAAs))}.items()
+            )        
     ld_hyperionstream = IncludeLaunchDescription( # hyperion streamer
             PythonLaunchDescriptionSource(
                 os.path.join(pkg_hyperion_interrogator, 'hyperion_streamer.launch.py')
                 ),
                 condition=conditions.IfCondition(
-               PythonExpression([LaunchConfiguration('sim_level_needle_sensing'), " == 2"]))
+               PythonExpression([LaunchConfiguration('sim_level_needle_sensing'), " == 2"])),
+               launch_arguments = {'ip': LaunchConfiguration('interrogatorIP')}.items()
             )
 
     # add to launch description
     ld.add_action(arg_simlevel)
     ld.add_action(arg_params)
+    ld.add_action(arg_interrIP)
    
     ld.add_action(ld_needlepub)
     ld.add_action(ld_hyperiondemo)
