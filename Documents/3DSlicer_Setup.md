@@ -1,6 +1,10 @@
 3D Slicer Setup - Ubuntu 22.04
 ===================
 
+ROS2
+--------------
+* Install ROS2 Humble: [Instructions](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html)
+
 3D Slicer
 --------------
 
@@ -11,7 +15,6 @@ To use SlicerROS2, we have to use a compiled version of 3D Slicer
   You will need to do the following after you ran CMake for the first time:
   * In the Slicer build directory, set Slicer_USE_SYSTEM_OpenSLL to ON using
     ```cmake . -DSlicer_USE_SYSTEM_OpenSSL=ON -DCMAKE_BUILD_TYPE=Release``` or ```ccmake.``` with Local Open SSL option
-* Install ROS2 Humble: [Instructions](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html)
 
 SlicerROS2
 --------------------
