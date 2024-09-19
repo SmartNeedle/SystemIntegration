@@ -7,7 +7,7 @@
 To use SlicerROS2, we have to use a compiled version of 3D Slicer
 * Download 3D Slicer source code (v. 5.7.0): https://github.com/Slicer/Slicer.git
 * Compile 3D Slicer ([build instructions for Ubuntu 22.04](https://slicer.readthedocs.io/en/latest/developer_guide/build_instructions/linux.html#ubuntu-22-04-jammy-jellyfish)).
-  **Before you start compiling Slicer**, make sure we use the system/native OpenSSL libraries otherwise you’ll get some errors when compiling the Slicer ROS 2 module.
+  **Before you start compiling Slicer**, make sure to use the system/native OpenSSL libraries otherwise you’ll get some errors when compiling the Slicer ROS 2 module.
   You will need to do the following after you ran CMake for the first time:
   * In the Slicer build directory, set Slicer_USE_SYSTEM_OpenSLL to ON using
     ```cmake . -DSlicer_USE_SYSTEM_OpenSSL=ON -DCMAKE_BUILD_TYPE=Release``` or ```ccmake.``` with Local Open SSL option
