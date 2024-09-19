@@ -3,7 +3,7 @@
 
 ROS2
 --------------
-* Install ROS2 Humble: [Instructions](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html)
+* Download and install ROS2 Humble: [Instructions](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html)
 
 3D Slicer
 --------------
@@ -19,7 +19,7 @@ To use SlicerROS2, we have to use a compiled version of 3D Slicer
 SlicerROS2
 --------------------
 
-* Download SlicerRO2 source: https://github.com/rosmed/slicer_ros2_module
+* Download SlicerROS2 source: https://github.com/rosmed/slicer_ros2_module
 * Compile SlicerROS2 module: [Instructions](https://slicer-ros2.readthedocs.io/en/latest/pages/getting-started.html#compilation)
 
 Other required Slicer Modules
