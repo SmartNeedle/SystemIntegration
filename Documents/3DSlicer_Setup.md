@@ -22,8 +22,8 @@ SlicerROS2
 Other required Slicer Modules
 --------------------
 
-* SlicerOpenIGTLink
-* SlicerDevelopmentToolbox
-* ZFrameRegistration
-* CurveMaker
-* SmartNeedle
+* SlicerOpenIGTLink: https://github.com/openigtlink/SlicerOpenIGTLink.git
+* SlicerDevelopmentToolbox: https://github.com/QIICR/SlicerDevelopmentToolbox.git
+* ZFrameRegistration (modified to choose different ZFrame model): https://github.com/maribernardes/ZFrameRegistration-3DSlicer.git
+* CurveMaker (modified to remove deprecated method): https://github.com/maribernardes/CurveMaker-3DSlicer
+* SmartNeedle: https://github.com/maribernardes/SmartNeedle-3DSlicer.git
