@@ -14,7 +14,7 @@ To use SlicerROS2, we have to use a compiled version of 3D Slicer
   **Before you start compiling Slicer**, make sure to use the system/native OpenSSL libraries otherwise you’ll get some errors when compiling the Slicer ROS 2 module.
   You will need to do the following after you ran CMake for the first time:
   * In the Slicer build directory, set Slicer_USE_SYSTEM_OpenSLL to ON using
-    ```cmake . -DSlicer_USE_SYSTEM_OpenSSL=ON -DCMAKE_BUILD_TYPE=Release``` or ```ccmake.``` with Local Open SSL option
+    ```cmake ../Slicer -DSlicer_USE_SYSTEM_OpenSSL=ON -DCMAKE_BUILD_TYPE=Release``` or ```ccmake.``` with Local Open SSL option
 
 SlicerROS2
 --------------------
